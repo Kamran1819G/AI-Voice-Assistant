@@ -129,7 +129,6 @@ if __name__ == '__main__':
         if "open word" in command or "open microsoft word" in command:
             path = "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
             try:
-
                 print("Opening Microsoft Word")
                 Speak("Opening Microsoft Word")
                 subprocess.call(path)
@@ -139,7 +138,6 @@ if __name__ == '__main__':
         if "open powerpoint" in command or "open microsoft powerpoint" in command:
             path = "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
             try:
-
                 print("Opening Microsoft PowerPoint")
                 Speak("Opening Microsoft PowerPoint")
                 subprocess.call(path)
