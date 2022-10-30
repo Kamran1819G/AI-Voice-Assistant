@@ -1,4 +1,3 @@
-from time import sleep
 import webbrowser
 import datetime
 import wikipedia
@@ -80,6 +79,8 @@ if __name__ == '__main__':
     # using while loop to communicate infinitely
     while True:
         command = take_commands().lower()
+
+        # For Opening Web Applications
         if "exit" in command or "quit" in command or "shut up" in command or "close" in command or "bye" in command or "goodbye" in command:
             print("Sure Sir, as your wish")
             Speak("Sure Sir, as your wish")
@@ -122,6 +123,24 @@ if __name__ == '__main__':
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             print(f"Sir, the time is {strTime}")
             Speak(f"Sir, the time is {strTime}")
+
+        # For Openning System Applications
+        if "open file explorer" in command:
+            print("Opening File Explorer")
+            Speak("Opening File Explorer")
+            subprocess.Popen("C:\\Windows\\explorer.exe")
+        if "open camera" in command:
+            print("Opening Camera")
+            Speak("Opening Camera")
+            os.system("start microsoft.windows.camera:")
+        if "open screen keyboard" in command or "open on screen keyboard" in command:
+            print("Opening on screen keyboard")
+            Speak("Opening on screen keyboard")
+            os.system("osk")
+        if "open calculator" in command:
+            print("Opening Calculator")
+            Speak("Opening Calculator")
+            os.system("calc")
         if "open terminal" in command or "open cmd" in command:
             print("Opening Terminal")
             Speak("Opening Terminal")
@@ -153,6 +172,15 @@ if __name__ == '__main__':
             except:
                 print("Sorry, I am not able to open Microsoft Excel")
                 Speak("Sorry, I am not able to open Microsoft Excel")
+        if "open code" in command or "open visual studio code" in command:
+            path = "C:\\Users\\Kamran Khan\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            try:
+                print("Opening Visual Studio Code")
+                Speak("Opening Visual Studio Code")
+                subprocess.call(path)
+            except:
+                print("Sorry, I am not able to open Visual Studio Code")
+                Speak("Sorry, I am not able to open Visual Studio Code")
         if "minimize all" in command or "minimise all" in command:
             keyboard.press_and_release('win + m')
             print("Minimizing all windows")
@@ -166,13 +194,30 @@ if __name__ == '__main__':
             keyboard.press_and_release('win + shift + s')
             print("Taking screenshot")
             Speak("Taking screenshot")
+
+        # For System Lock,Sleep,Restart,Shutdown
         if "lock my pc" in command or "lock my computer" in command or "lock my device" in command:
             print("Locking your PC")
             Speak("Locking your PC")
             os.system("rundll32.exe user32.dll, LockWorkStation")
             break
+        if "sleep my pc" in command or "sleep my computer" in command or "sleep my device" in command:
+            print("Putting your PC to sleep")
+            Speak("Putting your PC to sleep")
+            os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
+            break
         if "shutdown my pc" in command or "shutdown my computer" in command or "shutdown my device" in command:
             print("Shutting down your PC")
             Speak("Shutting down your PC")
             os.system("shutdown /s /t 1")
+            break
+        if "restart my pc" in command or "restart my computer" in command or "restart my device" in command:
+            print("Restarting your PC")
+            Speak("Restarting your PC")
+            os.system("shutdown /r /t 1")
+            break
+        if "hibernate my pc" in command or "hibernate my computer" in command or "hibernate my device" in command:
+            print("Hibernating your PC")
+            Speak("Hibernating your PC")
+            os.system("shutdown /h")
             break
