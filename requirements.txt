@@ -1,3 +1,6 @@
 Pyttsx3
 PyAudio
 SpeechRecognition
+wikipedia
+keyboard
+datetime

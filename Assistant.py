@@ -1,5 +1,10 @@
+from time import sleep
 import webbrowser
 import datetime
+import wikipedia
+import subprocess
+import keyboard
+import os
 import pyttsx3
 import speech_recognition as sr
 
@@ -23,14 +28,14 @@ def take_commands():
         print("")
         print("How can I help you?")
         Speak("How can I help you?")
-        print('Listening')
+        print('Listening...')
         r.pause_threshold = 0.8
         audio = r.listen(source)    # storing audio/sound to audio variable
         try:
-            print("Recognizing")
+            print("Recognizing...")
             # Recognizing audio using google api
             Query = r.recognize_google(audio)
-            print("Your Command : '", Query, "'")
+            print("you said : '", Query, "'")
         except Exception as e:
             print(e)
             print("Say that again sir")
@@ -40,7 +45,8 @@ def take_commands():
     # returning audio as text
     return Query
 
-# Speak() function to giving Speaking power to our voice assistant
+# creating Speak() function to giving Speaking power
+# to our voice assistant
 
 
 def Speak(audio):
@@ -74,29 +80,99 @@ if __name__ == '__main__':
     # using while loop to communicate infinitely
     while True:
         command = take_commands().lower()
-        if "exit" in command or "quit" in command or "shut up" in command:
+        if "exit" in command or "quit" in command or "shut up" in command or "close" in command or "bye" in command or "goodbye" in command:
             print("Sure Sir, as your wish")
             Speak("Sure Sir, as your wish")
             break
-        if "about yourself" in command:
+        if "about yourself" in command or "who are you" in command or "your name" in command:
             print("I am your personal assistant, I am created by you")
             Speak("I am your personal assistant, I am created by you")
-        if "open insta" in command or "open instagram" in command:
-            webbrowser.open_new_tab("https://www.instagram.com/")
-            print("Opening instagram")
-            Speak("Opening instagram")
-        if "open google" in command:
-            webbrowser.open_new_tab("https://www.google.com")
-            print("Google chrome is open now")
-            Speak("Google chrome is open now")
         if "search" in command:
             command = command.replace("search", "")
-            webbrowser.open_new_tab(command)
+            webbrowser.open_new_tab("https://www.google.com/search?q="+command)
+        if "who is" in command:
+            Speak('Searching Wikipedia...')
+            command = command.replace("who is", "")
+            results = wikipedia.summary(command, sentences=3)
+            print("According to Wikipedia")
+            Speak("According to Wikipedia")
+            print(results)
+            Speak(results)
+        if "open google" in command:
+            webbrowser.open_new_tab("https://www.google.com")
+            print("Openning Google")
+            Speak("Openning Google")
+        if "open youtube" in command:
+            webbrowser.open_new_tab("https://www.youtube.com")
+            print("Openning Youtube")
+            Speak("Openning Youtube")
+        if "open map" in command:
+            webbrowser.open_new_tab("https://www.google.com/maps")
+            print("Openning Google Maps")
+            Speak("Openning Google Maps")
         if "open gmail" in command:
             webbrowser.open_new_tab("gmail.com")
-            print("Google Mail open now")
-            Speak("Google Mail open now")
+            print("Openning Google Mail")
+            Speak("Openning Google Mail")
+        if "open insta" in command or "open instagram" in command:
+            webbrowser.open_new_tab("https://www.instagram.com/")
+            print("Opening Instagram")
+            Speak("Opening Instagram")
         if "time" in command:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             print(f"Sir, the time is {strTime}")
             Speak(f"Sir, the time is {strTime}")
+        if "open terminal" in command or "open cmd" in command:
+            subprocess.call('cmd.exe')
+            print("Opening Terminal")
+            Speak("Opening Terminal")
+        if "open word" in command or "open microsoft word" in command:
+            path = "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
+            try:
+                subprocess.call(path)
+                print("Opening Microsoft Word")
+                Speak("Opening Microsoft Word")
+            except:
+                print("Sorry, I am not able to open Microsoft Word")
+                Speak("Sorry, I am not able to open Microsoft Word")
+        if "open powerpoint" in command or "open microsoft powerpoint" in command:
+            path = "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
+            try:
+                subprocess.call(path)
+                print("Opening Microsoft PowerPoint")
+                Speak("Opening Microsoft PowerPoint")
+            except:
+                print("Sorry, I am not able to open Microsoft PowerPoint")
+                Speak("Sorry, I am not able to open Microsoft PowerPoint")
+        if "open excel" in command or "open microsoft excel" in command:
+            path = "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
+            try:
+                subprocess.call(path)
+                print("Opening Microsoft Excel")
+                Speak("Opening Microsoft Excel")
+            except:
+                print("Sorry, I am not able to open Microsoft Excel")
+                Speak("Sorry, I am not able to open Microsoft Excel")
+        if "minimize all" in command or "minimise all" in command:
+            keyboard.press_and_release('win + m')
+            print("Minimizing all windows")
+            Speak("Minimizing all windows")
+        if "maximize all" in command or "maximise all" in command:
+            keyboard.press_and_release('win + shift + m')
+            print("Maximizing all windows")
+            Speak("Maximizing all windows")
+        if "take screenshot" in command or "take screenshot" in command or "screenshot" in command:
+            keyboard.press_and_release('alt + tab')
+            keyboard.press_and_release('win + shift + s')
+            print("Taking screenshot")
+            Speak("Taking screenshot")
+        if "lock my pc" in command or "lock my computer" in command or "lock my device" in command:
+            print("Locking your PC")
+            Speak("Locking your PC")
+            os.system("rundll32.exe user32.dll, LockWorkStation")
+            break
+        if "shutdown my pc" in command or "shutdown my computer" in command or "shutdown my device" in command:
+            print("Shutting down your PC")
+            Speak("Shutting down your PC")
+            os.system("shutdown /s /t 1")
+            break
