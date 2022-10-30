@@ -123,33 +123,35 @@ if __name__ == '__main__':
             print(f"Sir, the time is {strTime}")
             Speak(f"Sir, the time is {strTime}")
         if "open terminal" in command or "open cmd" in command:
-            subprocess.call('cmd.exe')
             print("Opening Terminal")
             Speak("Opening Terminal")
+            subprocess.call('cmd.exe')
         if "open word" in command or "open microsoft word" in command:
             path = "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
             try:
-                subprocess.call(path)
+
                 print("Opening Microsoft Word")
                 Speak("Opening Microsoft Word")
+                subprocess.call(path)
             except:
                 print("Sorry, I am not able to open Microsoft Word")
                 Speak("Sorry, I am not able to open Microsoft Word")
         if "open powerpoint" in command or "open microsoft powerpoint" in command:
             path = "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE"
             try:
-                subprocess.call(path)
+
                 print("Opening Microsoft PowerPoint")
                 Speak("Opening Microsoft PowerPoint")
+                subprocess.call(path)
             except:
                 print("Sorry, I am not able to open Microsoft PowerPoint")
                 Speak("Sorry, I am not able to open Microsoft PowerPoint")
         if "open excel" in command or "open microsoft excel" in command:
             path = "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
             try:
-                subprocess.call(path)
                 print("Opening Microsoft Excel")
                 Speak("Opening Microsoft Excel")
+                subprocess.call(path)
             except:
                 print("Sorry, I am not able to open Microsoft Excel")
                 Speak("Sorry, I am not able to open Microsoft Excel")
