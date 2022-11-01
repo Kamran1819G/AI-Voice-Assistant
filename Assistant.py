@@ -28,7 +28,8 @@ def take_commands():
         print("How can I help you?")
         Speak("How can I help you?")
         print('Listening...')
-        r.pause_threshold = 0.8
+        # seconds of non-speaking audio before a phrase is considered complete
+        r.pause_threshold = 0.6
         audio = r.listen(source)    # storing audio/sound to audio variable
         try:
             print("Recognizing...")
@@ -80,20 +81,42 @@ if __name__ == '__main__':
     while True:
         command = take_commands().lower()
 
-        # For Opening Web Applications
-        if "exit" in command or "quit" in command or "shut up" in command or "close" in command or "bye" in command or "goodbye" in command:
-            print("Sure Sir, as your wish")
-            Speak("Sure Sir, as your wish")
-            break
+        # General commands
+        if "who is siri" in command:
+            print("Siri is a virtual assistant developed by Apple Inc.")
+            Speak("Siri is a virtual assistant developed by Apple Inc.")
+        if "who is google assistant" in command:
+            print("Google Assistant is a virtual assistant developed by Google.")
+            Speak("Google Assistant is a virtual assistant developed by Google.")
+        if "who is alexa" in command:
+            print("Alexa is a virtual assistant developed by Amazon.")
+            Speak("Alexa is a virtual assistant developed by Amazon.")
+        if "who is jarvis" in command:
+            print("Jarvis is a virtual assistant developed by Tony Stark.")
+            Speak("Jarvis is a virtual assistant developed by Tony Stark.")
+        if "who is cortana" in command:
+            print("Cortana is a virtual assistant developed by Microsoft.")
+            Speak("Cortana is a virtual assistant developed by Microsoft.")
         if "about yourself" in command or "who are you" in command or "your name" in command:
             print("I am your personal assistant, I am created by you")
             Speak("I am your personal assistant, I am created by you")
+        if "time" in command:
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")
+            print(f"Sir, the time is {strTime}")
+            Speak(f"Sir, the time is {strTime}")
+        if "exit" in command or "quit" in command or "shut up" in command or "bye" in command or "goodbye" in command:
+            print("Sure Sir, as your wish")
+            Speak("Sure Sir, as your wish")
+            break
+
+        # For Opening Web Applications
         if "search" in command:
             command = command.replace("search", "")
             webbrowser.open_new_tab("https://www.google.com/search?q="+command)
-        if "who is" in command:
+        if "who is" in command or "wikipedia" in command:
             Speak('Searching Wikipedia...')
-            command = command.replace("who is", "")
+            command = command.replace("who is", "") and command.replace(
+                "wikipedia", "") and command.replace("from wikipedia", "")
             results = wikipedia.summary(command, sentences=3)
             print("According to Wikipedia")
             Speak("According to Wikipedia")
@@ -119,32 +142,8 @@ if __name__ == '__main__':
             webbrowser.open_new_tab("https://www.instagram.com/")
             print("Opening Instagram")
             Speak("Opening Instagram")
-        if "time" in command:
-            strTime = datetime.datetime.now().strftime("%H:%M:%S")
-            print(f"Sir, the time is {strTime}")
-            Speak(f"Sir, the time is {strTime}")
 
-        # For Openning System Applications
-        if "open file explorer" in command:
-            print("Opening File Explorer")
-            Speak("Opening File Explorer")
-            subprocess.Popen("C:\\Windows\\explorer.exe")
-        if "open camera" in command:
-            print("Opening Camera")
-            Speak("Opening Camera")
-            os.system("start microsoft.windows.camera:")
-        if "open screen keyboard" in command or "open on screen keyboard" in command:
-            print("Opening on screen keyboard")
-            Speak("Opening on screen keyboard")
-            os.system("osk")
-        if "open calculator" in command:
-            print("Opening Calculator")
-            Speak("Opening Calculator")
-            os.system("calc")
-        if "open terminal" in command or "open cmd" in command:
-            print("Opening Terminal")
-            Speak("Opening Terminal")
-            subprocess.call('cmd.exe')
+        # For Opening User Applications
         if "open word" in command or "open microsoft word" in command:
             path = "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
             try:
@@ -173,7 +172,7 @@ if __name__ == '__main__':
                 print("Sorry, I am not able to open Microsoft Excel")
                 Speak("Sorry, I am not able to open Microsoft Excel")
         if "open code" in command or "open visual studio code" in command:
-            path = "C:\\Users\\Kamran Khan\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+            path = "C:\\Users\\"+os.getlogin()+"\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             try:
                 print("Opening Visual Studio Code")
                 Speak("Opening Visual Studio Code")
@@ -181,6 +180,111 @@ if __name__ == '__main__':
             except:
                 print("Sorry, I am not able to open Visual Studio Code")
                 Speak("Sorry, I am not able to open Visual Studio Code")
+        if "open eclipse" in command:
+            path = "C:\\Users\\"+os.getlogin()+"\\eclipse\\java-2022-06\\eclipse\\eclipse.exe"
+            try:
+                print("Opening Eclipse")
+                Speak("Opening Eclipse")
+                subprocess.call(path)
+            except:
+                print("Sorry, I am not able to open Eclipse")
+                Speak("Sorry, I am not able to open Eclipse")
+        if "open figma" in command:
+            path = "C:\\Users\\"+os.getlogin()+"\\AppData\\Local\\Figma\\Figma.exe"
+            try:
+                print("Opening Figma")
+                Speak("Opening Figma")
+                subprocess.call(path)
+            except:
+                print("Sorry, I am not able to open Figma")
+                Speak("Sorry, I am not able to open Figma")
+        if "open canva" in command:
+            path = "C:\\Users\\"+os.getlogin()+"\\AppData\\Local\\Programs\\Canva\\Canva.exe"
+            try:
+                print("Opening Canva")
+                Speak("Opening Canva")
+                subprocess.call(path)
+            except:
+                print("Sorry, I am not able to open Canva")
+                Speak("Sorry, I am not able to open Canva")
+        if "open discord" in command:
+            path = "C:\\Users\\"+os.getlogin() + \
+                "\\AppData\\Local\\Discord\\Update.exe --processStart Discord.exe"
+            try:
+                print("Opening Discord")
+                Speak("Opening Discord")
+                subprocess.call(path)
+            except:
+                print("Sorry, I am not able to open Discord")
+                Speak("Sorry, I am not able to open Discord")
+
+        # For Openning System Applications
+        if "open file explorer" in command:
+            print("Opening File Explorer")
+            Speak("Opening File Explorer")
+            subprocess.Popen("C:\\Windows\\explorer.exe")
+        if "open camera" in command:
+            print("Opening Camera")
+            Speak("Opening Camera")
+            os.system("start microsoft.windows.camera:")
+        if "open screen keyboard" in command or "open on screen keyboard" in command:
+            print("Opening on screen keyboard")
+            Speak("Opening on screen keyboard")
+            os.system("osk")
+        if "open calculator" in command:
+            print("Opening Calculator")
+            Speak("Opening Calculator")
+            os.system("calc")
+        if "open notepad" in command:
+            print("Opening Notepad")
+            Speak("Opening Notepad")
+            os.system("notepad")
+        if "open terminal" in command or "open cmd" in command:
+            print("Opening Terminal")
+            Speak("Opening Terminal")
+            subprocess.call('cmd.exe')
+        if "open control panel" in command:
+            print("Opening Control Panel")
+            Speak("Opening Control Panel")
+            os.system("control panel")
+        if "open task manager" in command:
+            print("Opening Task Manager")
+            Speak("Opening Task Manager")
+            os.system("taskmgr")
+        if "open environment variables" in command:
+            print("Opening Environment Variables")
+            Speak("Opening Environment Variables")
+            os.system("rundll32 sysdm.cpl,EditEnvironmentVariables")
+        if "open system properties" in command or "open system information" in command or "show system information" in command or "show system properties" in command:
+            print("Opening System Properties")
+            Speak("Opening System Properties")
+            os.system("sysdm.cpl")
+        if "open screen snipping" in command or "open screen snip" in command:
+            print("Opening Screen Snipping")
+            Speak("Opening Screen Snipping")
+            os.system("snippingtool")
+        if "disk cleanup" in command:
+            print("Openning disk cleanup")
+            Speak("Openning disk cleanup")
+            os.system("start cleanmgr")
+        if "open disk defragmenter" in command:
+            print("Openning disk defragmenter")
+            Speak("Openning disk defragmenter")
+            os.system("start dfrgui")
+        if "open disk management" in command:
+            print("Openning disk management")
+            Speak("Openning disk management")
+            os.system("start diskmgmt.msc")
+        if "open device manager" in command:
+            print("Openning device manager")
+            Speak("Openning device manager")
+            os.system("start devmgmt.msc")
+        if "open microsoft store" in command:
+            print("Openning microsoft store")
+            Speak("Openning microsoft store")
+            os.system("start ms-windows-store:")
+
+        # For Manuplation of Window size
         if "minimize all" in command or "minimise all" in command:
             keyboard.press_and_release('win + m')
             print("Minimizing all windows")
@@ -221,3 +325,93 @@ if __name__ == '__main__':
             Speak("Hibernating your PC")
             os.system("shutdown /h")
             break
+
+        # For Openning System Settings
+        if "turn on bluetooth" in command or "turn off bluetooth" in command or "open bluetooth settings" in command:
+            try:
+                print("Openning bluetooth settings")
+                Speak("Openning bluetooth settings")
+                os.system("start ms-settings:bluetooth")
+            except:
+                print("Sorry, I am not able to open bluetooth settings")
+                Speak("Sorry, I am not able to open bluetooth settings")
+        if "turn on wi-fi" in command or "turn off wi-fi" in command or "open wi-fi settings" in command:
+            try:
+                print("Openning Wi-Fi settings")
+                Speak("Openning Wi-Fi settings")
+                os.system("start ms-settings:network-wifi")
+            except:
+                print("Sorry, I am not able to open Wi-Fi settings")
+                Speak("Sorry, I am not able to open Wi-Fi settings")
+        if "open display settings" in command:
+            try:
+                print("Openning display settings")
+                Speak("Openning display settings")
+                os.system("start ms-settings:display")
+            except:
+                print("Sorry, I am not able to open display settings")
+                Speak("Sorry, I am not able to open display settings")
+        if "open sound settings" in command:
+            try:
+                print("Openning sound settings")
+                Speak("Openning sound settings")
+                os.system("start ms-settings:sound")
+            except:
+                print("Sorry, I am not able to open sound settings")
+                Speak("Sorry, I am not able to open sound settings")
+        if "turn on hotspot" in command or "turn off hotspot" in command or "open hotspot settings" in command:
+            try:
+                print("Openning hotspot settings")
+                Speak("Openning hotspot settings")
+                os.system("start ms-settings:network-mobilehotspot")
+            except:
+                print("Sorry, I am not able to open hotspot settings")
+                Speak("Sorry, I am not able to open hotspot settings")
+        if "turn on airplane mode" in command or "turn off airplane mode" in command or "open airplane mode settings" in command:
+            try:
+                print("Openning airplane mode settings")
+                Speak("Openning airplane mode settings")
+                os.system("start ms-settings:network-airplanemode")
+            except:
+                print("Sorry, I am not able to open airplane mode settings")
+                Speak("Sorry, I am not able to open airplane mode settings")
+        if "open battery settings" in command:
+            try:
+                print("Openning battery settings")
+                Speak("Openning battery settings")
+                os.system("start ms-settings:batterysaver")
+            except:
+                print("Sorry, I am not able to open battery settings")
+                Speak("Sorry, I am not able to open battery settings")
+        if "open location settings" in command:
+            try:
+                print("Openning location settings")
+                Speak("Openning location settings")
+                os.system("start ms-settings:privacy-location")
+            except:
+                print("Sorry, I am not able to open location settings")
+                Speak("Sorry, I am not able to open location settings")
+        if "turn on night light" in command or "turn off night light" in command or "open night light settings" in command:
+            try:
+                print("Openning night light settings")
+                Speak("Openning night light settings")
+                os.system("start ms-settings:nightlight")
+            except:
+                print("Sorry, I am not able to open night light settings")
+                Speak("Sorry, I am not able to open night light settings")
+        if "open theme settings" in command or "change theme" in command:
+            try:
+                print("Openning theme settings")
+                Speak("Openning theme settings")
+                os.system("start ms-settings:personalization")
+            except:
+                print("Sorry, I am not able to open theme settings")
+                Speak("Sorry, I am not able to open theme settings")
+        if "search for updates" in command or "check for updates" in command:
+            try:
+                print("Searching for updates")
+                Speak("Searching for updates")
+                os.system("start ms-settings:windowsupdate")
+            except:
+                print("Sorry, I am not able to search for updates")
+                Speak("Sorry, I am not able to search for updates")
