@@ -4,3 +4,4 @@ SpeechRecognition
 wikipedia
 keyboard
 datetime
+pyinstaller
