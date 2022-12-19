@@ -1,11 +1,18 @@
-import webbrowser
-import datetime
-import wikipedia
-import subprocess
-import keyboard
 import os
-import pyttsx3
-import speech_recognition as sr
+import webbrowser
+import subprocess
+import datetime
+
+try:
+    import pyaudio
+    import speech_recognition as sr
+    import wikipedia
+    import keyboard
+    import pyttsx3
+    import pyjokes
+except Exception as e:
+    print("Some modules are missing, Installing all require modules")
+    os.system('pip install -r requirements.txt')
 
 
 def greetMe():
@@ -34,7 +41,7 @@ def take_commands():
         try:
             print("Recognizing...")
             # Recognizing audio using google api
-            Query = r.recognize_google(audio)
+            Query = r.recognize_google(audio, language='en-in')
             print("you said : '", Query, "'")
         except Exception as e:
             print(e)
@@ -100,6 +107,10 @@ if __name__ == '__main__':
         if "about yourself" in command or "who are you" in command or "your name" in command:
             print("I am your personal assistant, I am created by you")
             Speak("I am your personal assistant, I am created by you")
+        if "joke" in command:
+            joke = pyjokes.get_joke()
+            print(joke)
+            Speak(joke)
         if "time" in command:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             print(f"Sir, the time is {strTime}")
@@ -305,12 +316,12 @@ if __name__ == '__main__':
             Speak("Locking your PC")
             os.system("rundll32.exe user32.dll, LockWorkStation")
             break
-        if "sleep my pc" in command or "sleep my computer" in command or "sleep my device" in command:
+        if "sleep" in command:
             print("Putting your PC to sleep")
             Speak("Putting your PC to sleep")
             os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
             break
-        if "shutdown my pc" in command or "shutdown my computer" in command or "shutdown my device" in command:
+        if "shutdown" in command:
             print("Shutting down your PC")
             Speak("Shutting down your PC")
             os.system("shutdown /s /t 1")

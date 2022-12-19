@@ -1,7 +1,7 @@
 Pyttsx3
-PyAudio
 SpeechRecognition
+pyaudio
 wikipedia
 keyboard
-datetime
 pyinstaller
+pyjokes
