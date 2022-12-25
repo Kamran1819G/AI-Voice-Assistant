@@ -27,13 +27,23 @@ def greetMe():
         print("Good Evening Sir")
         Speak("Good Evening Sir")
 
+# def wake_up():
+#    r = sr.Recognizer()
+#    with sr.Microphone() as source:
+#    audio = r.listen(source)
+#       try:
+#           Query = r.recognize_google(audio, language='en-in')
+#       except Exception as e:
+#           return "None"
+#    return Query
+
 
 def take_commands():
     r = sr.Recognizer()  # initializing speech_recognition
     with sr.Microphone() as source:  # opening physical microphone of computer
         print("")
-        print("How can I help you?")
-        Speak("How can I help you?")
+        print("Hi, How can I help you?")
+        Speak("Hi, How can I help you?")
         print('Listening...')
         # seconds of non-speaking audio before a phrase is considered complete
         r.pause_threshold = 0.6
@@ -45,8 +55,8 @@ def take_commands():
             print("you said : '", Query, "'")
         except Exception as e:
             print(e)
-            print("Say that again sir")
-            Speak("Say that again sir")
+            print("Please Say that again Sir")
+            Speak("Please Say that again Sir")
             # returning none if there are errors
             return "None"
     # returning audio as text
@@ -83,9 +93,13 @@ def Speak(audio):
 
 # Driver Code
 if __name__ == '__main__':
-    greetMe()
+    #    WAKE = "ok binod"
     # using while loop to communicate infinitely
     while True:
+        #        print("Wake me up by saying 'ok siri'")
+        #        command = wake_up().lower()
+
+        #        if command.count(WAKE) > 0:
         command = take_commands().lower()
 
         # General commands
@@ -123,7 +137,8 @@ if __name__ == '__main__':
         # For Opening Web Applications
         if "search" in command:
             command = command.replace("search", "")
-            webbrowser.open_new_tab("https://www.google.com/search?q="+command)
+            webbrowser.open_new_tab(
+                "https://www.google.com/search?q="+command)
         if "who is" in command or "wikipedia" in command:
             Speak('Searching Wikipedia...')
             command = command.replace("who is", "") and command.replace(
