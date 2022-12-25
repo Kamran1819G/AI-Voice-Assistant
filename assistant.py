@@ -4,15 +4,18 @@ import subprocess
 import datetime
 
 try:
-    import pyaudio
     import speech_recognition as sr
+    import pyaudio
     import wikipedia
     import keyboard
     import pyttsx3
     import pyjokes
 except Exception as e:
-    print("Some modules are missing, Installing all require modules")
-    os.system('pip install -r requirements.txt')
+    try:
+        print("Some modules are missing, Installing all require modules")
+        os.system('pip install -r requirements.txt')
+    except Exception as e:
+        os.system('python -u assistant.py')
 
 
 def greetMe():

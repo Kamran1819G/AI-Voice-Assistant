@@ -1,7 +1,7 @@
+pyinstaller
 Pyttsx3
 SpeechRecognition
 pyaudio
 wikipedia
 keyboard
-pyinstaller
 pyjokes
