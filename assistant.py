@@ -98,6 +98,7 @@ def Speak(audio):
 if __name__ == '__main__':
     #    WAKE = "ok binod"
     # using while loop to communicate infinitely
+    greetMe()
     while True:
         #        print("Wake me up by saying 'ok siri'")
         #        command = wake_up().lower()
