@@ -1,13 +1,13 @@
-# Virtual Assistant
+# AI Voice Assistant
 
-### <b> Environment Setup: </b>
+### **Environment Setup:**
 
 - Install Python 3.11.0 or (Any Higher Version).
 
 - Run `pip install -r requirements.txt` inside terminal.
 
-### <b>To Genenrate EXE file.</b>
+### **To generate desktop application for bot:**
 
-- Run `generate-exe.ps1` file.
+- Run `generate-exe.ps1`.
 
-### <b>This is OpenSource Virtual Assistant so your contribution will be appreciated by many of users</b>
+### **This is OpenSource Virtual Assistant so your contribution will be appreciated by many of users**

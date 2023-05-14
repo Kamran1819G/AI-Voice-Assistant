@@ -4,4 +4,4 @@ SpeechRecognition
 pyaudio
 wikipedia
 keyboard
-pyjokes
+GoogleBard
